@@ -52,19 +52,39 @@ const runAuto = async (url) => {
   const btnList = await driver.findElements(By.css('a[class^="linkButton"]'));
   console.log("button elements found: " + btnList.length);
 
-  //get all inner html in text elements =============== keep on working!!!
-  const editInnerHtml = async (htmlStr) => {
+  const editInLineStyle= async(element)=>{
     try {
+      const style={
+        'color': await element.getCssValue("color"),
+        'font-size': await element.getCssValue("font-size"),
+        'font-family': await element.getCssValue("font-family"),
+        'font-weight': await element.getCssValue('font-weight'),
+        'font-style': await element.getCssValue('font-style'),
+        'text-align': await element.getCssValue('text-align'),
+        'line-height': await element.getCssValue('line-height'),
+        'text-decoration-line': await element.getCssValue('text-decoration-line')
+      }
+
+    } catch (error) {
+      console.log("editInLineStyle func error: " + error);
+    }
+  }
+
+
+
+
+
+
+  //get all inner html in text elements
+  const editInnerHtml = (htmlStr,element) => {
+    const inlineStyle=editInLineStyle(element)
       const newHtmlStr = htmlStr
         .replace(/\n|\t|\r|\s|(?<=class=).*?(?=\">)/g, "")
         .replace(/h1/g, "p ")
         .replace(/class=\"/g, "")
         .replace(/span/g, "span ");
 
-      return `<p>${newHtmlStr}</p>`;
-    } catch (error) {
-      console.log("error in editInnerHtml function: " + error);
-    }
+      return `<p>${newHtmlStr}</p>`; 
   };
 
   // handeling the element list
@@ -82,7 +102,7 @@ const runAuto = async (url) => {
         const eleRgba = await list[index].getCssValue("background-color");
   
         if (eleType === "title" || eleType === "body") {
-          eleData = { text: await editInnerHtml(innerHtml) };
+          eleData = { text: await editInnerHtml(innerHtml,list[index]) };
         } else if (eleType === "button") {
           eleData = { href: await list[index].getAttribute("href") };
           eleStyle = {
@@ -103,7 +123,6 @@ const runAuto = async (url) => {
         }
   
         pushElementdata(elementRect, eleType, eleData, elementZ, eleStyle);
-        editInnerHtml(innerHtml);
       }
       
     } catch (error) {
