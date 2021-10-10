@@ -57,16 +57,7 @@ const runAuto = async (url) => {
         const styles = []
         const innerElementsList = await element.findElements(By.xpath(".//*"));
         for (let index = 0; index < innerElementsList.length; index++) {
-          const styleObj= {
-            'color': await innerElementsList[index].getCssValue("color"),
-            'font-size': await innerElementsList[index].getCssValue("font-size"),
-            'font-family': await innerElementsList[index].getCssValue("font-family"),
-            'font-weight': await innerElementsList[index].getCssValue('font-weight'),
-            'font-style': await innerElementsList[index].getCssValue('font-style'),
-            'text-align': await innerElementsList[index].getCssValue('text-align'),
-            'line-height': await innerElementsList[index].getCssValue('line-height'),
-            'text-decoration-line': await innerElementsList[index].getCssValue('text-decoration-line')
-          }
+          const styleObj= `color: ${await innerElementsList[index].getCssValue("color")}; font-size: ${await innerElementsList[index].getCssValue("font-size")}; font-family: ${await innerElementsList[index].getCssValue("font-family")}; font-weight: ${await innerElementsList[index].getCssValue('font-weight')}; font-style: ${await innerElementsList[index].getCssValue('font-style')}; text-align: ${await innerElementsList[index].getCssValue('text-align')}; line-height: ${await innerElementsList[index].getCssValue('line-height')}; text-decoration-line: ${await innerElementsList[index].getCssValue('text-decoration-line')};`
           const elementStyle = {
             type: await innerElementsList[index].getTagName(),
             style: styleObj,
@@ -100,13 +91,13 @@ const runAuto = async (url) => {
 
         for (let i = 0; i < inlineStyles.length; i++) {
           if (inlineStyles[i].type ==="span") {
-            newHtmlStr = newHtmlStr.replace(`<${inlineStyles[i].type} >`, `<${inlineStyles[i].type} style=${inlineStyles[i].style}>`)
+            newHtmlStr = newHtmlStr.replace(`<${inlineStyles[i].type} >`, `<${inlineStyles[i].type} "style=${inlineStyles[i].style}">`)
           }else{
 
-            newHtmlStr = newHtmlStr.replace(`<${inlineStyles[i].type}>`, `<${inlineStyles[i].type} style=${inlineStyles[i].style}>`)
+            newHtmlStr = newHtmlStr.replace(`<${inlineStyles[i].type}>`, `<${inlineStyles[i].type} "style=${inlineStyles[i].style}>"`)
           }
         }
-        newHtmlStr = newHtmlStr.replace(/h1/g, "p ")
+        newHtmlStr = newHtmlStr.replace(/h1/g, "p ").replace(/\"/g,'"')
 
         return `<p>${newHtmlStr}</p>`;
 
