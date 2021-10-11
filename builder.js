@@ -95,6 +95,103 @@ const jsScript = `documentServices.components.add({id: 'c1dmp', type: 'DESKTOP'}
   "skin": "wysiwyg.viewer.skins.area.DefaultAreaSkin"
 })`
 
+const buildComps = (json)=>{
+  for (let index = 0; index < json.length; index++) {
+    let type = ''
+    if (json[index].type === img) {
+      type="wysiwyg.viewer.components.WPhoto"
+      uri=json[index].href
+    }
+    return(`documentServices.components.add({id: 'c1dmp', type: 'DESKTOP'},{
+      "style": {
+          "styleType": "custom",
+          "componentClassName": "mobile.core.components.Container",
+          "style": {
+              "groups": {},
+              "properties": {
+                  "shd": "0px 1px 4px 0px rgba(0,0,0,0.6)",
+                  "rd": "0px",
+                  "alpha-brd": "1",
+                  "alpha-bg": "0",
+                  "bg": "rgba(255,79,79,1)",
+                  "brw": "15",
+                  "brd": "color_15",
+                  "boxShadowToggleOn-shd": "false"
+              },
+              "propertiesSource": {
+                  "shd": "value",
+                  "rd": "value",
+                  "alpha-brd": "value",
+                  "alpha-bg": "value",
+                  "bg": "value",
+                  "brw": "value",
+                  "brd": "theme",
+                  "boxShadowToggleOn-shd": "value"
+              }
+          },
+          "pageId": "",
+          "compId": "",
+          "type": "TopLevelStyle",
+          "metaData": {
+              "isPreset": false,
+              "schemaVersion": "1.0",
+              "isHidden": false
+          },
+          "skin": "wysiwyg.viewer.skins.area.DefaultAreaSkin"
+      },
+      "activeModes": {},
+      "components": [{
+          "componentType": "wysiwyg.viewer.components.SiteButton",
+          "style": "b1",
+          "layout": {
+              "width": 142,
+              "height": 40,
+              "x": 42,
+              "y": 165.1666603088379
+          },
+          "type": "Component",
+          "data": {
+              "label": "Button",
+              "link": null,
+              "type": "LinkableButton",
+              "metaData": {
+                  "isHidden": false,
+                  "isPreset": true,
+                  "schemaVersion": "1.0"
+              }
+          },
+          "props": {
+              "align": "center",
+              "margin": 0,
+              "type": "ButtonProperties",
+              "metaData": {
+                  "isHidden": false,
+                  "isPreset": true,
+                  "schemaVersion": "1.0"
+              }
+          }
+      }],
+      "componentType": "mobile.core.components.Container",
+      "id": "comp-jawn1liv",
+      "layout": {
+          "x": 206,
+          "fixedPosition": false,
+          "y": 17.166671752929688,
+          "scale": 1,
+          "height": 244,
+          "rotationInDegrees": 0,
+          "width": 568
+      },
+      "type": "Container",
+      "skin": "wysiwyg.viewer.skins.area.DefaultAreaSkin"
+    })`)
+    
+  }
+
+
+
+}
+
 const builderRun = async (url) => {
   let driver = await new webdriver.Builder().forBrowser("chrome").build();
   let By = webdriver.By;
