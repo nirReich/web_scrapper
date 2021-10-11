@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const webdriver = require("selenium-webdriver");
 const builderRun = require("./builder");
+const siteUrl="http://neurosymptomsnew.kk5.org/"
 
 const siteObj = { components: [] };
 
