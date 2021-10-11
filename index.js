@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const webdriver = require("selenium-webdriver");
+const builderRun = require("./builder");
 
 const siteObj = { components: [] };
 
@@ -74,11 +75,6 @@ const runAuto = async (url) => {
       }
     }
 
-
-
-
-
-
     //get all inner html in text elements
     const editInnerHtml = async (htmlStr, element) => {
       try {
@@ -105,7 +101,7 @@ const runAuto = async (url) => {
         console.log("editInnerHtml func error: " + error);
       }
 
-      //"<p><h1><span >548MargaretStreet</span ></h1><h1><span >London,England</span ></h1><h1><span >W1W8SZ</span ></h1><h1><span >&nbsp;</span ></h1><h1><span >+44(0)2075870554</span ></h1></p>"
+    
     };
 
     // handeling the element list
@@ -174,6 +170,18 @@ app.post("/", async (req, res) => {
   }
 });
 
+app.post("/wix", async (req,res)=>{
+  try {
+    const response = await builderRun(req.body.url);
+    res.send(response);
+    
+  } catch (error) {
+    console.log("post request error: " + error);
+  }
+})
+
 app.listen("8080", () => {
   console.log("server running on port 8080");
 });
+
+
