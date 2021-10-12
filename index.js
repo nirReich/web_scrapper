@@ -94,7 +94,7 @@ const runAuto = async (url) => {
             newHtmlStr = newHtmlStr.replace(`<${inlineStyles[i].type}>`, `<${inlineStyles[i].type} style=${inlineStyles[i].style}>`)
           }
         }
-        const newHtmlStr2 = newHtmlStr.replace(/h1/g, "p ").replace(/\"/g,'')
+        const newHtmlStr2 = newHtmlStr.replace(/h1/g, "p ").replace(/\"/g,'"')
 
         return `<p>${newHtmlStr2}</p>`;
 

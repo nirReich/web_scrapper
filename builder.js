@@ -14,15 +14,15 @@ let documentServices = {
 
 const elementList = [
   {
-    type: "title",
-    x: 44,
-    y: 16,
-    width: 878,
-    height: 115,
-    z_index: "16",
-    style: "",
-    text: '<p><span style="color:red; font-family: PT Sans Narrow; font-size:35px;" >im a title</span></p>',
-  },
+    "type": "title",
+    "x": 44,
+    "y": 16,
+    "width": 878,
+    "height": 115,
+    "z_index": "16",
+    "style": "",
+    "text": "<p><p  style=color: rgba(255, 255, 255, 1); font-size: 32px; font-family: \"PT Sans Narrow\"; font-weight: 400; font-style: normal; text-align: left; line-height: 42px; text-decoration-line: none;><span style=color: rgba(255, 255, 255, 1); font-size: 32px; font-family: \"PT Sans Narrow\"; font-weight: 400; font-style: normal; text-align: left; line-height: 42px; text-decoration-line: none;>FunctionalNeurologicalDisorder(FND):apatient'sguide</span ></p ><p  style=color: rgba(255, 255, 255, 1); font-size: 20px; font-family: \"PT Sans Narrow\"; font-weight: 400; font-style: normal; text-align: left; line-height: 36px; text-decoration-line: none;><span style=color: rgba(255, 255, 255, 1); font-size: 20px; font-family: \"PT Sans Narrow\"; font-weight: 400; font-style: normal; text-align: left; line-height: 36px; text-decoration-line: none;>includingFunctional/Dissociative(non-epileptic)Seizures,&nbsp;FunctionalMovementDisorderandotherfunctionalsymptoms</span ></p ></p>"
+},
   {
     type: "body",
     x: 24,
@@ -67,91 +67,90 @@ const elementList = [
 const buildComps = async (json) => {
   try {
     if (json.type === "title" || json.type === "body") {
-      return (`{
-        "style": "txtNew",
-        "data": {
-            "linkList": [],
-            "text": "${json.text}",
-            "stylesMapId": "CK_EDITOR_PARAGRAPH_STYLES",
-            "type": "StyledText",
-            "metaData": {
-                "isPreset": false,
-                "schemaVersion": "1.0",
-                "isHidden": false
-            }
+      return {
+        style: "txtNew",
+        data: {
+          linkList: [],
+          text: json.text,
+          stylesMapId: "CK_EDITOR_PARAGRAPH_STYLES",
+          type: "StyledText",
+          metaData: {
+            isPreset: false,
+            schemaVersion: "1.0",
+            isHidden: false,
+          },
         },
-        "componentType": "wysiwyg.viewer.components.WRichText",
-        "id": "WRichTextStyleFont1",
-        "layout": {
-            "x": ${json.x},
-            "fixedPosition": false,
-            "y": ${json.y},
-            "scale": 1,
-            "height": ${json.height},
-            "rotationInDegrees": 0,
-            "width": ${json.width}
+        componentType: "wysiwyg.viewer.components.WRichText",
+        id: "WRichTextStyleFont1",
+        layout: {
+          x: json.x,
+          fixedPosition: false,
+          y: json.y,
+          scale: 1,
+          height: json.height,
+          rotationInDegrees: 0,
+          width: json.width,
         },
-        "type": "Component",
-        "skin": "wysiwyg.viewer.skins.WRichTextNewSkin"
-    }`)
+        type: "Component",
+        skin: "wysiwyg.viewer.skins.WRichTextNewSkin",
+      };
     } else if (json.type === "img") {
-      return(`{
-        "componentType": "wysiwyg.viewer.components.WPhoto",
-        "layout": {
-            "width": ${json.width},
-            "height": ${json.hight},
-            "x": ${json.x},
-            "y": ${json.y},
-            "rotationInDegrees": 0,
-            "scale": 1,
-            "fixedPosition": false,
-            "anchors": []
+      return {
+        componentType: "wysiwyg.viewer.components.WPhoto",
+        layout: {
+          width: json.width,
+          height: json.hight,
+          x: json.x,
+          y: json.y,
+          rotationInDegrees: 0,
+          scale: 1,
+          fixedPosition: false,
+          anchors: [],
         },
-        "data": {
-            "width": ${json.width},
-            "height": ${json.hight},
-            "alt": "${json.type}",
-            "name": "${json.type}",
-            "uri": "${json.src}",
-            "type": "Image",
-            "description": ""
+        data: {
+          width: json.width,
+          height: json.hight,
+          alt: json.type,
+          name: json.type,
+          uri: json.src,
+          type: "Image",
+          description: "",
         },
-        "props": {
-            "type": "WPhotoProperties"
+        props: {
+          type: "WPhotoProperties",
         },
-        "style": "wp2"
-    }`)
-      
+        style: "wp2",
+      };
     } else if (json.type === "button") {
-      return(`{
-        "componentType": "wixui.StylableButton",
-        "style": "stButton4",
-        "layout": {
-            "width": ${json.width},
-            "height": ${json.hight},
-            "x": ${json.x},
-            "y": ${json.y}
+      return {
+        componentType: "wixui.StylableButton",
+        style: "stButton4",
+        layout: {
+          width: json.width,
+          height: json.hight,
+          x: json.x,
+          y: json.y,
         },
-        "type": "Component",
-        "data": {
-            "label": "Button",
-            "svgId": "b861b040274141de9c08999ec3b76edf.svg",
-            "type": "StylableButton",
-            "metaData": {
-                "isPreset": false,
-                "schemaVersion": "1.0",
-                "isHidden": false
-            }
+        type: "Component",
+        data: {
+          label: "Button",
+          svgId: "b861b040274141de9c08999ec3b76edf.svg",
+          type: "StylableButton",
+          metaData: {
+            isPreset: false,
+            schemaVersion: "1.0",
+            isHidden: false,
+          },
         },
-        "props": {
-            "type": "StylableButtonProperties",
-            "metaData": {
-                "isHidden": false,
-                "isPreset": true,
-                "schemaVersion": "1.0"
-            }
-        }
-    }`)
+        props: {
+          type: "StylableButtonProperties",
+          metaData: {
+            isHidden: false,
+            isPreset: true,
+            schemaVersion: "1.0",
+          },
+        },
+      };
     }
   } catch (error) {
     console.log("buildComps func error: " + error);
@@ -424,19 +423,18 @@ const builderRun = async (url) => {
     // executing script:
     for (let index = 0; index < elementList.length; index++) {
       const element = elementList[index];
-      const json =await buildComps(element);
-      const fatherId = "{id: 'c1dmp', type: 'DESKTOP'}";
-      
+      const json = await buildComps(element);
+      const fatherId = { id: "c1dmp", type: "DESKTOP" };
+
       const scriptCallback = [
         () => {
-          documentServices.components.add(fatherId, json);
-        
+          documentServices.components.add(arguments[0], arguments[1]);
         },
         fatherId,
-        json
+        json,
       ];
-     
-      await driver.executeScript(scriptCallback[0],fatherId,json);
+
+      await driver.executeScript(...scriptCallback);
     }
 
     return "app runing!";
