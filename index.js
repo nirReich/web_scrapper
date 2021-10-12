@@ -4,7 +4,7 @@ const webdriver = require("selenium-webdriver");
 const builderRun = require("./builder");
 const siteUrl="http://neurosymptomsnew.kk5.org/"
 
-const siteObj = { components: [] };
+const siteObj = [];
 
 const pushElementdata = (element, type, att, z_index, style = "none") => {
   compObj = {
@@ -16,7 +16,7 @@ const pushElementdata = (element, type, att, z_index, style = "none") => {
     z_index,
     style,
   };
-  siteObj.components.push({ ...compObj, ...att });
+  siteObj.push({ ...compObj, ...att });
 };
 
 const getType = (className) => {

@@ -6,191 +6,163 @@ const wixUrl =
 const logInEmail = "nir.reich@devalore.com";
 const logInPass = "Nir@Devalore";
 let documentServices = {
-  components:{
-    add:()=>{},
-    update:()=>{}
-  }
+  components: {
+    add: () => {},
+    update: () => {},
+  },
 };
-const jsScript = `documentServices.components.add({id: 'c1dmp', type: 'DESKTOP'},{
-  "style": {
-      "styleType": "custom",
-      "componentClassName": "mobile.core.components.Container",
-      "style": {
-          "groups": {},
-          "properties": {
-              "shd": "0px 1px 4px 0px rgba(0,0,0,0.6)",
-              "rd": "0px",
-              "alpha-brd": "1",
-              "alpha-bg": "0",
-              "bg": "rgba(255,79,79,1)",
-              "brw": "15",
-              "brd": "color_15",
-              "boxShadowToggleOn-shd": "false"
-          },
-          "propertiesSource": {
-              "shd": "value",
-              "rd": "value",
-              "alpha-brd": "value",
-              "alpha-bg": "value",
-              "bg": "value",
-              "brw": "value",
-              "brd": "theme",
-              "boxShadowToggleOn-shd": "value"
-          }
-      },
-      "pageId": "",
-      "compId": "",
-      "type": "TopLevelStyle",
-      "metaData": {
-          "isPreset": false,
-          "schemaVersion": "1.0",
-          "isHidden": false
-      },
-      "skin": "wysiwyg.viewer.skins.area.DefaultAreaSkin"
-  },
-  "activeModes": {},
-  "components": [{
-      "componentType": "wysiwyg.viewer.components.SiteButton",
-      "style": "b1",
-      "layout": {
-          "width": 142,
-          "height": 40,
-          "x": 42,
-          "y": 165.1666603088379
-      },
-      "type": "Component",
-      "data": {
-          "label": "Button",
-          "link": null,
-          "type": "LinkableButton",
-          "metaData": {
-              "isHidden": false,
-              "isPreset": true,
-              "schemaVersion": "1.0"
-          }
-      },
-      "props": {
-          "align": "center",
-          "margin": 0,
-          "type": "ButtonProperties",
-          "metaData": {
-              "isHidden": false,
-              "isPreset": true,
-              "schemaVersion": "1.0"
-          }
-      }
-  }],
-  "componentType": "mobile.core.components.Container",
-  "id": "comp-jawn1liv",
-  "layout": {
-      "x": 206,
-      "fixedPosition": false,
-      "y": 17.166671752929688,
-      "scale": 1,
-      "height": 244,
-      "rotationInDegrees": 0,
-      "width": 568
-  },
-  "type": "Container",
-  "skin": "wysiwyg.viewer.skins.area.DefaultAreaSkin"
-})`
 
-const buildComps = (json)=>{
-  for (let index = 0; index < json.length; index++) {
-    let type = ''
-    if (json[index].type === img) {
-      type="wysiwyg.viewer.components.WPhoto"
-      uri=json[index].href
-    }
-    return(`documentServices.components.add({id: 'c1dmp', type: 'DESKTOP'},{
-      "style": {
-          "styleType": "custom",
-          "componentClassName": "mobile.core.components.Container",
-          "style": {
-              "groups": {},
-              "properties": {
-                  "shd": "0px 1px 4px 0px rgba(0,0,0,0.6)",
-                  "rd": "0px",
-                  "alpha-brd": "1",
-                  "alpha-bg": "0",
-                  "bg": "rgba(255,79,79,1)",
-                  "brw": "15",
-                  "brd": "color_15",
-                  "boxShadowToggleOn-shd": "false"
-              },
-              "propertiesSource": {
-                  "shd": "value",
-                  "rd": "value",
-                  "alpha-brd": "value",
-                  "alpha-bg": "value",
-                  "bg": "value",
-                  "brw": "value",
-                  "brd": "theme",
-                  "boxShadowToggleOn-shd": "value"
+const elementList = [
+  {
+    type: "title",
+    x: 44,
+    y: 16,
+    width: 878,
+    height: 115,
+    z_index: "16",
+    style: "",
+    text: '<p><p  "style=color: rgba(255, 255, 255, 1); font-size: 32px; font-family: "PT Sans Narrow"; font-weight: 400; font-style: normal; text-align: left; line-height: 42px; text-decoration-line: none;>"<span "style=color: rgba(255, 255, 255, 1); font-size: 32px; font-family: "PT Sans Narrow"; font-weight: 400; font-style: normal; text-align: left; line-height: 42px; text-decoration-line: none;">FunctionalNeurologicalDisorder(FND):apatient\'sguide</span ></p ><p  "style=color: rgba(255, 255, 255, 1); font-size: 20px; font-family: "PT Sans Narrow"; font-weight: 400; font-style: normal; text-align: left; line-height: 36px; text-decoration-line: none;>"<span "style=color: rgba(255, 255, 255, 1); font-size: 20px; font-family: "PT Sans Narrow"; font-weight: 400; font-style: normal; text-align: left; line-height: 36px; text-decoration-line: none;">includingFunctional/Dissociative(non-epileptic)Seizures,&nbsp;FunctionalMovementDisorderandotherfunctionalsymptoms</span ></p ></p>',
+  },
+  {
+    type: "body",
+    x: 24,
+    y: 959,
+    width: 534,
+    height: 35,
+    z_index: "49",
+    style: "",
+    text: '<p><p "style=color: rgba(51, 68, 0, 1); font-size: 11px; font-family: Verdana, Geneva, sans-serif; font-weight: 400; font-style: normal; text-align: left; line-height: 13px; text-decoration-line: none;>"<span "style=color: rgba(51, 68, 0, 1); font-size: 11px; font-family: Verdana, Geneva, sans-serif; font-weight: 400; font-style: normal; text-align: left; line-height: 13px; text-decoration-line: none;">Clickon</span ><span "style=color: rgba(51, 68, 0, 1); font-size: 11px; font-family: Verdana, Geneva, sans-serif; font-weight: 400; font-style: normal; text-align: left; line-height: 13px; text-decoration-line: underline;"><ahref="/links-downloads/4594358060"target="_self">LinksandDownloadstab</a></span ><span "style=color: rgba(51, 68, 0, 1); font-size: 11px; font-family: Verdana, Geneva, sans-serif; font-weight: 400; font-style: normal; text-align: left; line-height: 13px; text-decoration-line: none;">&nbsp;onthemenuabovetoaccessawiderangeofleaflets,bookletsandinternetlinks</span ></p></p>',
+  },
+  {
+    type: "img",
+    x: 922,
+    y: 16,
+    width: 55,
+    height: 58,
+    z_index: "17",
+    style: "",
+    src: "http://neurosymptomsnew.kk5.org/communities/9/004/013/612/269//images/4634740908_55x58.jpg",
+  },
+  {
+    type: "button",
+    x: 577,
+    y: 509,
+    width: 179,
+    height: 26,
+    z_index: "73",
+    style: {
+      backgroundOpacity: "0.49",
+      backgroundColor: "rgba(135, 182, 17, 0.49)",
+      backgroundImage: "none",
+      borderColor: "rgba(135, 182, 17, 0.49)",
+      borderWidth: "0px",
+      borderRadius: "100px",
+      borderStyle: "solid",
+      shadow: "none",
+    },
+    href: "http://neurosymptomsnew.kk5.org/functional-limb-weakness/4594357994",
+  },
+];
+
+const buildComps = async (json,driver) => {
+  
+  try {
+    if (json.type === "title" || json.type === "body") {
+      await driver.executeScript(`documentServices.components.add({id: 'c1dmp', type: 'DESKTOP'},
+        {
+          "style": "txtNew",
+          "data": {
+              "linkList": [],
+              "text": "${json.text}",
+              "stylesMapId": "CK_EDITOR_PARAGRAPH_STYLES",
+              "type": "StyledText",
+              "metaData": {
+                  "isPreset": false,
+                  "schemaVersion": "1.0",
+                  "isHidden": false
               }
           },
-          "pageId": "",
-          "compId": "",
-          "type": "TopLevelStyle",
-          "metaData": {
-              "isPreset": false,
-              "schemaVersion": "1.0",
-              "isHidden": false
-          },
-          "skin": "wysiwyg.viewer.skins.area.DefaultAreaSkin"
-      },
-      "activeModes": {},
-      "components": [{
-          "componentType": "wysiwyg.viewer.components.SiteButton",
-          "style": "b1",
+          "componentType": "wysiwyg.viewer.components.WRichText",
+          "id": "WRichTextStyleFont1",
           "layout": {
-              "width": 142,
-              "height": 40,
-              "x": 42,
-              "y": 165.1666603088379
+              "x": ${json.x},
+              "fixedPosition": false,
+              "y": ${json.y},
+              "scale": 1,
+              "height": ${json.hight},
+              "rotationInDegrees": 0,
+              "width": ${json.width}
+          },
+          "type": "Component",
+          "skin": "wysiwyg.viewer.skins.WRichTextNewSkin"
+      })`);
+    } else if (json.type === "img") {
+      await driver.executeScript(
+        `documentServices.components.add({id: 'c1dmp', type: 'DESKTOP'},
+          {
+            "componentType": "wysiwyg.viewer.components.WPhoto",
+            "layout": {
+                "width": ${json.width},
+                "height": ${json.hight},
+                "x": ${json.x},
+                "y": ${json.y},
+                "rotationInDegrees": 0,
+                "scale": 1,
+                "fixedPosition": false,
+                "anchors": []
+            },
+            "data": {
+                "width": ${json.width},
+                "height": ${json.hight},
+                "alt": "${json.type}",
+                "name": "${json.type}",
+                "uri": ${json.src},
+                "type": "Image",
+                "description": ""
+            },
+            "props": {
+                "type": "WPhotoProperties"
+            },
+            "style": "wp2"
+        })`
+      );
+    } else if (json.type === "button") {
+      await driver.executeScript(`documentServices.components.add({id: 'c1dmp', type: 'DESKTOP'},
+        {
+          "componentType": "wixui.StylableButton",
+          "style": "stButton4",
+          "layout": {
+              "width": ${json.width},
+              "height": ${json.hight},
+              "x": ${json.x},
+              "y": ${json.y}
           },
           "type": "Component",
           "data": {
               "label": "Button",
-              "link": null,
-              "type": "LinkableButton",
+              "svgId": "b861b040274141de9c08999ec3b76edf.svg",
+              "type": "StylableButton",
               "metaData": {
-                  "isHidden": false,
-                  "isPreset": true,
-                  "schemaVersion": "1.0"
+                  "isPreset": false,
+                  "schemaVersion": "1.0",
+                  "isHidden": false
               }
           },
           "props": {
-              "align": "center",
-              "margin": 0,
-              "type": "ButtonProperties",
+              "type": "StylableButtonProperties",
               "metaData": {
                   "isHidden": false,
                   "isPreset": true,
                   "schemaVersion": "1.0"
               }
           }
-      }],
-      "componentType": "mobile.core.components.Container",
-      "id": "comp-jawn1liv",
-      "layout": {
-          "x": 206,
-          "fixedPosition": false,
-          "y": 17.166671752929688,
-          "scale": 1,
-          "height": 244,
-          "rotationInDegrees": 0,
-          "width": 568
-      },
-      "type": "Container",
-      "skin": "wysiwyg.viewer.skins.area.DefaultAreaSkin"
-    })`)
-    
+      }
+        )`);
+    }
+  } catch (error) {
+    console.log("buildComps func error: " + error);
   }
-
-
-
-}
+};
 
 const builderRun = async (url) => {
   let driver = await new webdriver.Builder().forBrowser("chrome").build();
@@ -199,8 +171,7 @@ const builderRun = async (url) => {
 
   const connectToWix = async () => {
     try {
-
-      const cookies  = [
+      const cookies = [
         {
           domain: "editor.wix.com",
           expiry: 1633948547,
@@ -208,7 +179,8 @@ const builderRun = async (url) => {
           name: "fedops.logger.defaultOverrides",
           path: "/",
           secure: false,
-          value: "%7B%22paramsOverridesForApp%22%3A%7B%22wixstores-dashboard-shipping.pages.index%22%3A%7B%22is_rollout%22%3Atrue%7D%7D%7D",
+          value:
+            "%7B%22paramsOverridesForApp%22%3A%7B%22wixstores-dashboard-shipping.pages.index%22%3A%7B%22is_rollout%22%3Atrue%7D%7D%7D",
         },
         {
           domain: ".wix.com",
@@ -217,7 +189,8 @@ const builderRun = async (url) => {
           name: "__utmz",
           path: "/",
           secure: false,
-          value: "248670552.1633948484.1.1.utmcsr=users.wix.com|utmccn=(referral)|utmcmd=referral|utmcct=/",
+          value:
+            "248670552.1633948484.1.1.utmcsr=users.wix.com|utmccn=(referral)|utmcmd=referral|utmcct=/",
         },
         {
           domain: ".editor.wix.com",
@@ -272,7 +245,8 @@ const builderRun = async (url) => {
           path: "/",
           sameSite: "None",
           secure: true,
-          value: "nirreich4||NOT_VERIFIED_OPT_IN|0|1633948482510|1639737282510|6cbe913f-410e-4c01-adb3-9b9191d31d08|{}|wix",
+          value:
+            "nirreich4||NOT_VERIFIED_OPT_IN|0|1633948482510|1639737282510|6cbe913f-410e-4c01-adb3-9b9191d31d08|{}|wix",
         },
         {
           domain: ".wix.com",
@@ -292,7 +266,8 @@ const builderRun = async (url) => {
           path: "/",
           sameSite: "Lax",
           secure: false,
-          value: "d001ee8568490c76cebae9389658221bb013bd86f7b17931f179cd82b0bd796d:/OPZXCFiqzDje6Armpd/Q9uR7tSGgph4SixFzWr0WpEMCBbSp2NzyeQK4NIOGLTigBRIq7NwvzzpFNRu5xvT7Q==:1000:oSLmsIu5Vsv+nU4M9G3gYmuaxYNCTI0wVjr2UMoaKWYzdnA4SC4k3RxE1RWJF/WKdWHksxXeDQFchQ0uyKvxsLPUhW+wpu4vr2cITvdaur069R0xTVwizPjNdAll8n8QnMW5ChMf7PD1ocs9kxqJo3eNv9Td+MOa6JfnZpglM/TE/nAvsQx9nD77CjHOygYnVGh8h4oQXlj5AbqWqL1qbQ==",
+          value:
+            "d001ee8568490c76cebae9389658221bb013bd86f7b17931f179cd82b0bd796d:/OPZXCFiqzDje6Armpd/Q9uR7tSGgph4SixFzWr0WpEMCBbSp2NzyeQK4NIOGLTigBRIq7NwvzzpFNRu5xvT7Q==:1000:oSLmsIu5Vsv+nU4M9G3gYmuaxYNCTI0wVjr2UMoaKWYzdnA4SC4k3RxE1RWJF/WKdWHksxXeDQFchQ0uyKvxsLPUhW+wpu4vr2cITvdaur069R0xTVwizPjNdAll8n8QnMW5ChMf7PD1ocs9kxqJo3eNv9Td+MOa6JfnZpglM/TE/nAvsQx9nD77CjHOygYnVGh8h4oQXlj5AbqWqL1qbQ==",
         },
         {
           domain: ".wix.com",
@@ -301,7 +276,8 @@ const builderRun = async (url) => {
           name: "_wixAB3|6cbe913f-410e-4c01-adb3-9b9191d31d08",
           path: "/",
           secure: false,
-          value: "268550#1|175264#2|232814#2|150438#4|218208#1|164139#2|261409#1|262698#2|261000#1|236860#1|261358#1|262082#2|237659#2|231756#1|213671#2|239251#1|235885#2|260816#2|269193#2|211047#1|200674#4|185525#2|185798#1|261361#2|203287#2|240333#1|237658#2|238002#1|182661#2|220536#1|233548#1|241184#1|261108#1|239412#2|232564#2|268918#1|261352#1|234829#2|207438#1|205715#1|190452#1|241775#2|236643#2|261321#1|199602#1|239108#1",
+          value:
+            "268550#1|175264#2|232814#2|150438#4|218208#1|164139#2|261409#1|262698#2|261000#1|236860#1|261358#1|262082#2|237659#2|231756#1|213671#2|239251#1|235885#2|260816#2|269193#2|211047#1|200674#4|185525#2|185798#1|261361#2|203287#2|240333#1|237658#2|238002#1|182661#2|220536#1|233548#1|241184#1|261108#1|239412#2|232564#2|268918#1|261352#1|234829#2|207438#1|205715#1|190452#1|241775#2|236643#2|261321#1|199602#1|239108#1",
         },
         {
           domain: ".wix.com",
@@ -394,7 +370,8 @@ const builderRun = async (url) => {
           path: "/",
           sameSite: "None",
           secure: true,
-          value: "JWT.eyJraWQiOiJrdU42YlJQRCIsImFsZyI6IlJTMjU2In0.eyJkYXRhIjoie1widXNlckd1aWRcIjpcIjZjYmU5MTNmLTQxMGUtNGMwMS1hZGIzLTliOTE5MWQzMWQwOFwiLFwidXNlck5hbWVcIjpcIm5pcnJlaWNoNFwiLFwiY29sb3JzXCI6e30sXCJ1Y2RcIjpcIjIwMjEtMTAtMTBUMTE6MTk6MjcuMDAwKzAwMDBcIixcInd4c1wiOmZhbHNlLFwiZXd4ZFwiOmZhbHNlLFwiYW9yXCI6dHJ1ZSxcImFjaVwiOlwiNmNiZTkxM2YtNDEwZS00YzAxLWFkYjMtOWI5MTkxZDMxZDA4XCIsXCJybWJcIjp0cnVlLFwibHZsZFwiOlwiMjAyMS0xMC0xMVQxMDozNDo0Mi40NzcrMDAwMFwiLFwibGF0aFwiOlwiMjAyMS0xMC0xMVQxMDozNDo0Mi40NzcrMDAwMFwiLFwid3hleHBcIjpcIjIwMjEtMTAtMjZUMTA6MzQ6NDIuNTA3KzAwMDBcIn0iLCJpYXQiOjE2MzM5NDg0ODIsImV4cCI6MTYzNTI0NDQ4Mn0.erx7ZhrC16vjDf_7x0QPrawleyF4z35eXtU2wwfqPTN0bx9IxCB_ocslfEe-FW0JsaC_aCE7D9esdxP2uT2An1O38ZzJBZVNzJRjkKwQTAogY2FFhdEjqrky9VQKiYjquV_wesJNNITskXOfXJ6ZRQxRkUjgdX2XBR8GBIdNQZjyPdgc4FDn_Ow35QDUin2TCj9HoW5ZOSAVjw6jPNR-X5chibw1k_GwTzo-X_Io_jGmyi33Mco1sZLNuiy7ZwcQInKbkAQrTEOIngGqSfnARPxfhZToLeJEK8yfEWkw3IfXu0GBHo2QX-qHP6RcGrOHRVJSQRCI3UfY2OFXRg4qxw",
+          value:
+            "JWT.eyJraWQiOiJrdU42YlJQRCIsImFsZyI6IlJTMjU2In0.eyJkYXRhIjoie1widXNlckd1aWRcIjpcIjZjYmU5MTNmLTQxMGUtNGMwMS1hZGIzLTliOTE5MWQzMWQwOFwiLFwidXNlck5hbWVcIjpcIm5pcnJlaWNoNFwiLFwiY29sb3JzXCI6e30sXCJ1Y2RcIjpcIjIwMjEtMTAtMTBUMTE6MTk6MjcuMDAwKzAwMDBcIixcInd4c1wiOmZhbHNlLFwiZXd4ZFwiOmZhbHNlLFwiYW9yXCI6dHJ1ZSxcImFjaVwiOlwiNmNiZTkxM2YtNDEwZS00YzAxLWFkYjMtOWI5MTkxZDMxZDA4XCIsXCJybWJcIjp0cnVlLFwibHZsZFwiOlwiMjAyMS0xMC0xMVQxMDozNDo0Mi40NzcrMDAwMFwiLFwibGF0aFwiOlwiMjAyMS0xMC0xMVQxMDozNDo0Mi40NzcrMDAwMFwiLFwid3hleHBcIjpcIjIwMjEtMTAtMjZUMTA6MzQ6NDIuNTA3KzAwMDBcIn0iLCJpYXQiOjE2MzM5NDg0ODIsImV4cCI6MTYzNTI0NDQ4Mn0.erx7ZhrC16vjDf_7x0QPrawleyF4z35eXtU2wwfqPTN0bx9IxCB_ocslfEe-FW0JsaC_aCE7D9esdxP2uT2An1O38ZzJBZVNzJRjkKwQTAogY2FFhdEjqrky9VQKiYjquV_wesJNNITskXOfXJ6ZRQxRkUjgdX2XBR8GBIdNQZjyPdgc4FDn_Ow35QDUin2TCj9HoW5ZOSAVjw6jPNR-X5chibw1k_GwTzo-X_Io_jGmyi33Mco1sZLNuiy7ZwcQInKbkAQrTEOIngGqSfnARPxfhZToLeJEK8yfEWkw3IfXu0GBHo2QX-qHP6RcGrOHRVJSQRCI3UfY2OFXRg4qxw",
         },
         {
           domain: ".wix.com",
@@ -415,9 +392,9 @@ const builderRun = async (url) => {
           secure: false,
           value: "cbb75151-2a7e-11ec-8f1a-705169706e71",
         },
-      ]
+      ];
       for (const cookie of cookies) {
-        if (cookie.domain === '.wix.com') {
+        if (cookie.domain === ".wix.com") {
           await driver.manage().addCookie(cookie);
         }
       }
@@ -428,32 +405,34 @@ const builderRun = async (url) => {
     }
   };
 
-  const getTheFrame = async(frame)=>{
+  const getTheFrame = async (frame) => {
     try {
-      await driver.switchTo().frame(frame)
-      console.log('getTheFrame func: frame changed!');
-
+      await driver.switchTo().frame(frame);
+      console.log("getTheFrame func: frame changed!");
     } catch (error) {
       console.log("getTheFrame func error: " + error);
     }
-  }
-//--------------------------------------------------------------------
+  };
+  //--------------------------------------------------------------------
   try {
     await driver.get(url);
     await driver.manage().window().maximize();
 
-    // connect to wix and await until ceptcha is ok
+    // connect to wix and switch to frame:
     await connectToWix();
+    await driver.wait(
+      until.elementLocated(By.css('iframe[id="preview"]')),
+      10000
+    );
+    const frame = await driver.findElement(By.css('iframe[id="preview"]'));
+    await getTheFrame(frame);
 
-    const frame= await driver.findElement(By.css('iframe[id="preview"]'))
-    await getTheFrame(frame)
+    // executing script:
+    for (let index = 0; index < elementList.length; index++) {
+      const element = elementList[index];
+      await buildComps(element,driver);
+    }
 
-    // ---executing script------
-    setTimeout(async ()=>{await driver.executeScript(jsScript)},5000)
-    
-    
-
-    
     return "app runing!";
   } catch (error) {
     console.log("error at builderRun main func: " + error);
@@ -461,4 +440,3 @@ const builderRun = async (url) => {
 };
 
 module.exports = builderRun;
-
