@@ -21,7 +21,7 @@ const elementList = [
     height: 115,
     z_index: "16",
     style: "",
-    text: '<p><p  "style=color: rgba(255, 255, 255, 1); font-size: 32px; font-family: "PT Sans Narrow"; font-weight: 400; font-style: normal; text-align: left; line-height: 42px; text-decoration-line: none;>"<span "style=color: rgba(255, 255, 255, 1); font-size: 32px; font-family: "PT Sans Narrow"; font-weight: 400; font-style: normal; text-align: left; line-height: 42px; text-decoration-line: none;">FunctionalNeurologicalDisorder(FND):apatient\'sguide</span ></p ><p  "style=color: rgba(255, 255, 255, 1); font-size: 20px; font-family: "PT Sans Narrow"; font-weight: 400; font-style: normal; text-align: left; line-height: 36px; text-decoration-line: none;>"<span "style=color: rgba(255, 255, 255, 1); font-size: 20px; font-family: "PT Sans Narrow"; font-weight: 400; font-style: normal; text-align: left; line-height: 36px; text-decoration-line: none;">includingFunctional/Dissociative(non-epileptic)Seizures,&nbsp;FunctionalMovementDisorderandotherfunctionalsymptoms</span ></p ></p>',
+    text: '<p><span style="color:red; font-family: PT Sans Narrow; font-size:35px;" >im a title</span></p>',
   },
   {
     type: "body",
@@ -31,7 +31,7 @@ const elementList = [
     height: 35,
     z_index: "49",
     style: "",
-    text: '<p><p "style=color: rgba(51, 68, 0, 1); font-size: 11px; font-family: Verdana, Geneva, sans-serif; font-weight: 400; font-style: normal; text-align: left; line-height: 13px; text-decoration-line: none;>"<span "style=color: rgba(51, 68, 0, 1); font-size: 11px; font-family: Verdana, Geneva, sans-serif; font-weight: 400; font-style: normal; text-align: left; line-height: 13px; text-decoration-line: none;">Clickon</span ><span "style=color: rgba(51, 68, 0, 1); font-size: 11px; font-family: Verdana, Geneva, sans-serif; font-weight: 400; font-style: normal; text-align: left; line-height: 13px; text-decoration-line: underline;"><ahref="/links-downloads/4594358060"target="_self">LinksandDownloadstab</a></span ><span "style=color: rgba(51, 68, 0, 1); font-size: 11px; font-family: Verdana, Geneva, sans-serif; font-weight: 400; font-style: normal; text-align: left; line-height: 13px; text-decoration-line: none;">&nbsp;onthemenuabovetoaccessawiderangeofleaflets,bookletsandinternetlinks</span ></p></p>',
+    text: "<p><p  style=color: rgba(255, 255, 255, 1); font-size: 32px; font-family: PT Sans Narrow; font-weight: 400; font-style: normal; text-align: left; line-height: 42px; text-decoration-line: none;><span style=color: rgba(255, 255, 255, 1); font-size: 32px; font-family: PT Sans Narrow; font-weight: 400; font-style: normal; text-align: left; line-height: 42px; text-decoration-line: none;>FunctionalNeurologicalDisorder(FND):apatient'sguide</span ></p ><p  style=color: rgba(255, 255, 255, 1); font-size: 20px; font-family: PT Sans Narrow; font-weight: 400; font-style: normal; text-align: left; line-height: 36px; text-decoration-line: none;><span style=color: rgba(255, 255, 255, 1); font-size: 20px; font-family: PT Sans Narrow; font-weight: 400; font-style: normal; text-align: left; line-height: 36px; text-decoration-line: none;>includingFunctional/Dissociative(non-epileptic)Seizures,&nbsp;FunctionalMovementDisorderandotherfunctionalsymptoms</span ></p ></p>",
   },
   {
     type: "img",
@@ -64,100 +64,94 @@ const elementList = [
   },
 ];
 
-const buildComps = async (json,driver) => {
-  
+const buildComps = async (json) => {
   try {
     if (json.type === "title" || json.type === "body") {
-      await driver.executeScript(`documentServices.components.add({id: 'c1dmp', type: 'DESKTOP'},
-        {
-          "style": "txtNew",
-          "data": {
-              "linkList": [],
-              "text": "${json.text}",
-              "stylesMapId": "CK_EDITOR_PARAGRAPH_STYLES",
-              "type": "StyledText",
-              "metaData": {
-                  "isPreset": false,
-                  "schemaVersion": "1.0",
-                  "isHidden": false
-              }
-          },
-          "componentType": "wysiwyg.viewer.components.WRichText",
-          "id": "WRichTextStyleFont1",
-          "layout": {
-              "x": ${json.x},
-              "fixedPosition": false,
-              "y": ${json.y},
-              "scale": 1,
-              "height": ${json.hight},
-              "rotationInDegrees": 0,
-              "width": ${json.width}
-          },
-          "type": "Component",
-          "skin": "wysiwyg.viewer.skins.WRichTextNewSkin"
-      })`);
+      return (`{
+        "style": "txtNew",
+        "data": {
+            "linkList": [],
+            "text": "${json.text}",
+            "stylesMapId": "CK_EDITOR_PARAGRAPH_STYLES",
+            "type": "StyledText",
+            "metaData": {
+                "isPreset": false,
+                "schemaVersion": "1.0",
+                "isHidden": false
+            }
+        },
+        "componentType": "wysiwyg.viewer.components.WRichText",
+        "id": "WRichTextStyleFont1",
+        "layout": {
+            "x": ${json.x},
+            "fixedPosition": false,
+            "y": ${json.y},
+            "scale": 1,
+            "height": ${json.height},
+            "rotationInDegrees": 0,
+            "width": ${json.width}
+        },
+        "type": "Component",
+        "skin": "wysiwyg.viewer.skins.WRichTextNewSkin"
+    }`)
     } else if (json.type === "img") {
-      await driver.executeScript(
-        `documentServices.components.add({id: 'c1dmp', type: 'DESKTOP'},
-          {
-            "componentType": "wysiwyg.viewer.components.WPhoto",
-            "layout": {
-                "width": ${json.width},
-                "height": ${json.hight},
-                "x": ${json.x},
-                "y": ${json.y},
-                "rotationInDegrees": 0,
-                "scale": 1,
-                "fixedPosition": false,
-                "anchors": []
-            },
-            "data": {
-                "width": ${json.width},
-                "height": ${json.hight},
-                "alt": "${json.type}",
-                "name": "${json.type}",
-                "uri": ${json.src},
-                "type": "Image",
-                "description": ""
-            },
-            "props": {
-                "type": "WPhotoProperties"
-            },
-            "style": "wp2"
-        })`
-      );
+      return(`{
+        "componentType": "wysiwyg.viewer.components.WPhoto",
+        "layout": {
+            "width": ${json.width},
+            "height": ${json.hight},
+            "x": ${json.x},
+            "y": ${json.y},
+            "rotationInDegrees": 0,
+            "scale": 1,
+            "fixedPosition": false,
+            "anchors": []
+        },
+        "data": {
+            "width": ${json.width},
+            "height": ${json.hight},
+            "alt": "${json.type}",
+            "name": "${json.type}",
+            "uri": "${json.src}",
+            "type": "Image",
+            "description": ""
+        },
+        "props": {
+            "type": "WPhotoProperties"
+        },
+        "style": "wp2"
+    }`)
+      
     } else if (json.type === "button") {
-      await driver.executeScript(`documentServices.components.add({id: 'c1dmp', type: 'DESKTOP'},
-        {
-          "componentType": "wixui.StylableButton",
-          "style": "stButton4",
-          "layout": {
-              "width": ${json.width},
-              "height": ${json.hight},
-              "x": ${json.x},
-              "y": ${json.y}
-          },
-          "type": "Component",
-          "data": {
-              "label": "Button",
-              "svgId": "b861b040274141de9c08999ec3b76edf.svg",
-              "type": "StylableButton",
-              "metaData": {
-                  "isPreset": false,
-                  "schemaVersion": "1.0",
-                  "isHidden": false
-              }
-          },
-          "props": {
-              "type": "StylableButtonProperties",
-              "metaData": {
-                  "isHidden": false,
-                  "isPreset": true,
-                  "schemaVersion": "1.0"
-              }
-          }
-      }
-        )`);
+      return(`{
+        "componentType": "wixui.StylableButton",
+        "style": "stButton4",
+        "layout": {
+            "width": ${json.width},
+            "height": ${json.hight},
+            "x": ${json.x},
+            "y": ${json.y}
+        },
+        "type": "Component",
+        "data": {
+            "label": "Button",
+            "svgId": "b861b040274141de9c08999ec3b76edf.svg",
+            "type": "StylableButton",
+            "metaData": {
+                "isPreset": false,
+                "schemaVersion": "1.0",
+                "isHidden": false
+            }
+        },
+        "props": {
+            "type": "StylableButtonProperties",
+            "metaData": {
+                "isHidden": false,
+                "isPreset": true,
+                "schemaVersion": "1.0"
+            }
+        }
+    }`)
     }
   } catch (error) {
     console.log("buildComps func error: " + error);
@@ -430,7 +424,19 @@ const builderRun = async (url) => {
     // executing script:
     for (let index = 0; index < elementList.length; index++) {
       const element = elementList[index];
-      await buildComps(element,driver);
+      const json =await buildComps(element);
+      const fatherId = "{id: 'c1dmp', type: 'DESKTOP'}";
+      
+      const scriptCallback = [
+        () => {
+          documentServices.components.add(fatherId, json);
+        
+        },
+        fatherId,
+        json
+      ];
+     
+      await driver.executeScript(scriptCallback[0],fatherId,json);
     }
 
     return "app runing!";

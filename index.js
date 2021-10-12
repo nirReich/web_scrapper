@@ -88,15 +88,15 @@ const runAuto = async (url) => {
 
         for (let i = 0; i < inlineStyles.length; i++) {
           if (inlineStyles[i].type ==="span") {
-            newHtmlStr = newHtmlStr.replace(`<${inlineStyles[i].type} >`, `<${inlineStyles[i].type} "style=${inlineStyles[i].style}">`)
+            newHtmlStr = newHtmlStr.replace(`<${inlineStyles[i].type} >`, `<${inlineStyles[i].type} style=${inlineStyles[i].style}>`)
           }else{
 
-            newHtmlStr = newHtmlStr.replace(`<${inlineStyles[i].type}>`, `<${inlineStyles[i].type} "style=${inlineStyles[i].style}>"`)
+            newHtmlStr = newHtmlStr.replace(`<${inlineStyles[i].type}>`, `<${inlineStyles[i].type} style=${inlineStyles[i].style}>`)
           }
         }
-        newHtmlStr = newHtmlStr.replace(/h1/g, "p ").replace(/\"/g,'"')
+        const newHtmlStr2 = newHtmlStr.replace(/h1/g, "p ").replace(/\"/g,'')
 
-        return `<p>${newHtmlStr}</p>`;
+        return `<p>${newHtmlStr2}</p>`;
 
       } catch (error) {
         console.log("editInnerHtml func error: " + error);
