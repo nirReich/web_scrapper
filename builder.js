@@ -14,54 +14,15 @@ let documentServices = {
 
 const elementList = [
   {
-    "type": "title",
-    "x": 44,
-    "y": 16,
-    "width": 878,
-    "height": 115,
-    "z_index": "16",
-    "style": "",
-    "text": "<p><p  style=color: rgba(255, 255, 255, 1); font-size: 32px; font-family: \"PT Sans Narrow\"; font-weight: 400; font-style: normal; text-align: left; line-height: 42px; text-decoration-line: none;><span style=color: rgba(255, 255, 255, 1); font-size: 32px; font-family: \"PT Sans Narrow\"; font-weight: 400; font-style: normal; text-align: left; line-height: 42px; text-decoration-line: none;>FunctionalNeurologicalDisorder(FND):apatient'sguide</span ></p ><p  style=color: rgba(255, 255, 255, 1); font-size: 20px; font-family: \"PT Sans Narrow\"; font-weight: 400; font-style: normal; text-align: left; line-height: 36px; text-decoration-line: none;><span style=color: rgba(255, 255, 255, 1); font-size: 20px; font-family: \"PT Sans Narrow\"; font-weight: 400; font-style: normal; text-align: left; line-height: 36px; text-decoration-line: none;>includingFunctional/Dissociative(non-epileptic)Seizures,&nbsp;FunctionalMovementDisorderandotherfunctionalsymptoms</span ></p ></p>"
-},
-  {
-    type: "body",
-    x: 24,
-    y: 959,
-    width: 534,
-    height: 35,
-    z_index: "49",
-    style: "",
-    text: "<p><p  style=color: rgba(255, 255, 255, 1); font-size: 32px; font-family: PT Sans Narrow; font-weight: 400; font-style: normal; text-align: left; line-height: 42px; text-decoration-line: none;><span style=color: rgba(255, 255, 255, 1); font-size: 32px; font-family: PT Sans Narrow; font-weight: 400; font-style: normal; text-align: left; line-height: 42px; text-decoration-line: none;>FunctionalNeurologicalDisorder(FND):apatient'sguide</span ></p ><p  style=color: rgba(255, 255, 255, 1); font-size: 20px; font-family: PT Sans Narrow; font-weight: 400; font-style: normal; text-align: left; line-height: 36px; text-decoration-line: none;><span style=color: rgba(255, 255, 255, 1); font-size: 20px; font-family: PT Sans Narrow; font-weight: 400; font-style: normal; text-align: left; line-height: 36px; text-decoration-line: none;>includingFunctional/Dissociative(non-epileptic)Seizures,&nbsp;FunctionalMovementDisorderandotherfunctionalsymptoms</span ></p ></p>",
-  },
-  {
-    type: "img",
-    x: 922,
+    type: "title",
+    x: 44,
     y: 16,
-    width: 55,
-    height: 58,
-    z_index: "17",
+    width: 878,
+    height: 115,
+    z_index: "16",
     style: "",
-    src: "http://neurosymptomsnew.kk5.org/communities/9/004/013/612/269//images/4634740908_55x58.jpg",
-  },
-  {
-    type: "button",
-    x: 577,
-    y: 509,
-    width: 179,
-    height: 26,
-    z_index: "73",
-    style: {
-      backgroundOpacity: "0.49",
-      backgroundColor: "rgba(135, 182, 17, 0.49)",
-      backgroundImage: "none",
-      borderColor: "rgba(135, 182, 17, 0.49)",
-      borderWidth: "0px",
-      borderRadius: "100px",
-      borderStyle: "solid",
-      shadow: "none",
-    },
-    href: "http://neurosymptomsnew.kk5.org/functional-limb-weakness/4594357994",
-  },
+    text: "<p><p  style=\"color: rgba(155, 155, 155, 1); font-size: 32px; font-family: \"PT Sans Narrow\"; font-weight: 400; font-style: normal; text-align: left; line-height: 42px; text-decoration-line: none;>\"<span style=\"color: rgba(155, 155, 155, 1); font-size: 32px; font-family: \"PT Sans Narrow\"; font-weight: 400; font-style: normal; text-align: left; line-height: 42px; text-decoration-line: none;>\"FunctionalNeurologicalDisorder(FND):apatient'sguide</span ></p ><p  style=\"color: rgba(155, 155, 155, 1); font-size: 20px; font-family: \"PT Sans Narrow\"; font-weight: 400; font-style: normal; text-align: left; line-height: 36px; text-decoration-line: none;>\"<span style=\"color: rgba(155, 155, 155, 1); font-size: 20px; font-family: \"PT Sans Narrow\"; font-weight: 400; font-style: normal; text-align: left; line-height: 36px; text-decoration-line: none;>\"includingFunctional/Dissociative(non-epileptic)Seizures,&nbsp;FunctionalMovementDisorderandotherfunctionalsymptoms</span ></p ></p>"
+}
 ];
 
 const buildComps = async (json) => {
@@ -94,6 +55,7 @@ const buildComps = async (json) => {
         type: "Component",
         skin: "wysiwyg.viewer.skins.WRichTextNewSkin",
       };
+
     } else if (json.type === "img") {
       return {
         componentType: "wysiwyg.viewer.components.WPhoto",
@@ -427,8 +389,8 @@ const builderRun = async (url) => {
       const fatherId = { id: "c1dmp", type: "DESKTOP" };
 
       const scriptCallback = [
-        () => {
-          documentServices.components.add(arguments[0], arguments[1]);
+        (fatherId, json) => {
+          documentServices.components.add(fatherId, json);
         },
         fatherId,
         json,
@@ -444,3 +406,4 @@ const builderRun = async (url) => {
 };
 
 module.exports = builderRun;
+

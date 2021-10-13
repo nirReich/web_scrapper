@@ -88,10 +88,10 @@ const runAuto = async (url) => {
 
         for (let i = 0; i < inlineStyles.length; i++) {
           if (inlineStyles[i].type ==="span") {
-            newHtmlStr = newHtmlStr.replace(`<${inlineStyles[i].type} >`, `<${inlineStyles[i].type} style=${inlineStyles[i].style}>`)
+            newHtmlStr = newHtmlStr.replace(`<${inlineStyles[i].type} >`, `<${inlineStyles[i].type} style="${inlineStyles[i].style}>"`)
           }else{
 
-            newHtmlStr = newHtmlStr.replace(`<${inlineStyles[i].type}>`, `<${inlineStyles[i].type} style=${inlineStyles[i].style}>`)
+            newHtmlStr = newHtmlStr.replace(`<${inlineStyles[i].type}>`, `<${inlineStyles[i].type} style="${inlineStyles[i].style}>"`)
           }
         }
         const newHtmlStr2 = newHtmlStr.replace(/h1/g, "p ").replace(/\"/g,'"')
