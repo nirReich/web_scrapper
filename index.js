@@ -6,7 +6,7 @@ const siteUrl="http://neurosymptomsnew.kk5.org/"
 
 const siteObj = [];
 
-const pushElementdata = (element, type, att, z_index, style = "none") => {
+const pushElementdata = (element, type, attribute, z_index, style = "none") => {
   compObj = {
     type,
     x: element.x,
@@ -16,7 +16,7 @@ const pushElementdata = (element, type, att, z_index, style = "none") => {
     z_index,
     style,
   };
-  siteObj.push({ ...compObj, ...att });
+  siteObj.push({ ...compObj, ...attribute });
 };
 
 const getType = (className) => {
@@ -82,21 +82,21 @@ const runAuto = async (url) => {
         const inlineStyles = await editInLineStyle(element)
 
         let newHtmlStr = htmlStr
-          .replace(/\n|\t|\r|\s|(?<=class=).*?(?=\">)/g, "")
+          .replace(/\n|\t|\r|(?<=class=).*?(?=\">)/g, "")
           .replace(/class=\"/g, "")
           .replace(/span/g, "span ");
 
         for (let i = 0; i < inlineStyles.length; i++) {
           if (inlineStyles[i].type ==="span") {
-            newHtmlStr = newHtmlStr.replace(`<${inlineStyles[i].type} >`, `<${inlineStyles[i].type} style="${inlineStyles[i].style}>"`)
+            newHtmlStr = newHtmlStr.replace(`<${inlineStyles[i].type}  >`, `<${inlineStyles[i].type} style="${inlineStyles[i].style}">`)
           }else{
 
-            newHtmlStr = newHtmlStr.replace(`<${inlineStyles[i].type}>`, `<${inlineStyles[i].type} style="${inlineStyles[i].style}>"`)
+            newHtmlStr = newHtmlStr.replace(`<${inlineStyles[i].type}`, `<${inlineStyles[i].type} style="${inlineStyles[i].style}"`)
           }
         }
-        const newHtmlStr2 = newHtmlStr.replace(/h1/g, "p ").replace(/\"/g,'"')
+        newHtmlStr = newHtmlStr.replace(/h1/g, "p ").replace(/\"/g,'"').replace(/ahref/g,'a href')
 
-        return `<p>${newHtmlStr2}</p>`;
+        return `<p>${newHtmlStr}</p>`;
 
       } catch (error) {
         console.log("editInnerHtml func error: " + error);

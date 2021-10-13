@@ -14,20 +14,21 @@ let documentServices = {
 
 const elementList = [
   {
-    type: "title",
-    x: 44,
-    y: 16,
-    width: 878,
-    height: 115,
-    z_index: "16",
-    style: "",
-    text: "<p><p  style=\"color: rgba(155, 155, 155, 1); font-size: 32px; font-family: \"PT Sans Narrow\"; font-weight: 400; font-style: normal; text-align: left; line-height: 42px; text-decoration-line: none;>\"<span style=\"color: rgba(155, 155, 155, 1); font-size: 32px; font-family: \"PT Sans Narrow\"; font-weight: 400; font-style: normal; text-align: left; line-height: 42px; text-decoration-line: none;>\"FunctionalNeurologicalDisorder(FND):apatient'sguide</span ></p ><p  style=\"color: rgba(155, 155, 155, 1); font-size: 20px; font-family: \"PT Sans Narrow\"; font-weight: 400; font-style: normal; text-align: left; line-height: 36px; text-decoration-line: none;>\"<span style=\"color: rgba(155, 155, 155, 1); font-size: 20px; font-family: \"PT Sans Narrow\"; font-weight: 400; font-style: normal; text-align: left; line-height: 36px; text-decoration-line: none;>\"includingFunctional/Dissociative(non-epileptic)Seizures,&nbsp;FunctionalMovementDisorderandotherfunctionalsymptoms</span ></p ></p>"
-}
+    "type": "title",
+    "x": 44,
+    "y": 16,
+    "width": 878,
+    "height": 115,
+    "z_index": "16",
+    "style": "",
+    "text": "<p><p  style=\"color: rgba(255, 255, 255, 1); font-size: 20px; font-family: \"PT Sans Narrow\"; font-weight: 400; font-style: normal; text-align: left; line-height: 36px; text-decoration-line: none;\" style=\"color: rgba(255, 255, 255, 1); font-size: 32px; font-family: \"PT Sans Narrow\"; font-weight: 400; font-style: normal; text-align: left; line-height: 42px; text-decoration-line: none;\" >              <span style=\"color: rgba(255, 255, 255, 1); font-size: 32px; font-family: \"PT Sans Narrow\"; font-weight: 400; font-style: normal; text-align: left; line-height: 42px; text-decoration-line: none;\">Functional Neurological Disorder (FND) : a patient's guide</span >          </p >      <p  >              <span style=\"color: rgba(255, 255, 255, 1); font-size: 20px; font-family: \"PT Sans Narrow\"; font-weight: 400; font-style: normal; text-align: left; line-height: 36px; text-decoration-line: none;\">including Functional/Dissociative (non-epileptic) Seizures, &nbsp;Functional Movement Disorder and other functional symptoms</span >          </p >      </p>"
+},
 ];
 
 const buildComps = async (json) => {
   try {
     if (json.type === "title" || json.type === "body") {
+      //---------------text model----------
       return {
         style: "txtNew",
         data: {
@@ -57,6 +58,7 @@ const buildComps = async (json) => {
       };
 
     } else if (json.type === "img") {
+      //---------------img model----------
       return {
         componentType: "wysiwyg.viewer.components.WPhoto",
         layout: {
@@ -84,9 +86,22 @@ const buildComps = async (json) => {
         style: "wp2",
       };
     } else if (json.type === "button") {
+      //---------------button model----------
       return {
         componentType: "wixui.StylableButton",
-        style: "stButton4",
+        style: {
+          "background": json.style.borderStyle,
+          "background-attachment": "",
+          "background-clip": "",
+          "background-color": json.style.backgroundColor,
+          "background-image": json.style.backgroundImage,
+          "background-origin": "",
+          "background-position": "",
+          "background-position-x": "",
+          "background-position-y": "",
+          "background-repeat": "",
+          "background-size": json.style.borderWidth
+      },
         layout: {
           width: json.width,
           height: json.hight,
