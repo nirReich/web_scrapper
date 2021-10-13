@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const webdriver = require("selenium-webdriver");
 const builderRun = require("./builder");
-const siteUrl="http://neurosymptomsnew.kk5.org/"
+const siteUrl = "http://neurosymptomsnew.kk5.org/";
 
 const siteObj = [];
 
@@ -56,30 +56,44 @@ const runAuto = async (url) => {
 
     const editInLineStyle = async (element) => {
       try {
-        const styles = []
+        const styles = [];
         const innerElementsList = await element.findElements(By.xpath(".//*"));
         for (let index = 0; index < innerElementsList.length; index++) {
-          const styleObj= `color: ${await innerElementsList[index].getCssValue("color")}; font-size: ${await innerElementsList[index].getCssValue("font-size")}; font-family: ${await innerElementsList[index].getCssValue("font-family")}; font-weight: ${await innerElementsList[index].getCssValue('font-weight')}; font-style: ${await innerElementsList[index].getCssValue('font-style')}; text-align: ${await innerElementsList[index].getCssValue('text-align')}; line-height: ${await innerElementsList[index].getCssValue('line-height')}; text-decoration-line: ${await innerElementsList[index].getCssValue('text-decoration-line')};`
+          const styleObj = `color: ${await innerElementsList[index].getCssValue(
+            "color"
+          )}; font-size: ${await innerElementsList[index].getCssValue(
+            "font-size"
+          )}; font-family: ${await innerElementsList[index].getCssValue(
+            "font-family"
+          )}; font-weight: ${await innerElementsList[index].getCssValue(
+            "font-weight"
+          )}; font-style: ${await innerElementsList[index].getCssValue(
+            "font-style"
+          )}; text-align: ${await innerElementsList[index].getCssValue(
+            "text-align"
+          )}; line-height: ${await innerElementsList[index].getCssValue(
+            "line-height"
+          )}; text-decoration-line: ${await innerElementsList[
+            index
+          ].getCssValue("text-decoration-line")};`;
           const elementStyle = {
             type: await innerElementsList[index].getTagName(),
             style: styleObj,
-            exe:await innerElementsList[index].getCssValue("color")
-          }
-          styles.push(elementStyle)
-
+            exe: await innerElementsList[index].getCssValue("color"),
+          };
+          styles.push(elementStyle);
         }
 
-        return styles
-
+        return styles;
       } catch (error) {
         console.log("editInLineStyle func error: " + error);
       }
-    }
+    };
 
     //get all inner html in text elements
     const editInnerHtml = async (htmlStr, element) => {
       try {
-        const inlineStyles = await editInLineStyle(element)
+        const inlineStyles = await editInLineStyle(element);
 
         let newHtmlStr = htmlStr
           .replace(/\n|\t|\r|(?<=class=).*?(?=\">)/g, "")
@@ -87,22 +101,27 @@ const runAuto = async (url) => {
           .replace(/span/g, "span ");
 
         for (let i = 0; i < inlineStyles.length; i++) {
-          if (inlineStyles[i].type ==="span") {
-            newHtmlStr = newHtmlStr.replace(`<${inlineStyles[i].type}  >`, `<${inlineStyles[i].type} style="${inlineStyles[i].style}">`)
-          }else{
-
-            newHtmlStr = newHtmlStr.replace(`<${inlineStyles[i].type}`, `<${inlineStyles[i].type} style="${inlineStyles[i].style}"`)
+          if (inlineStyles[i].type === "span") {
+            newHtmlStr = newHtmlStr.replace(
+              `<${inlineStyles[i].type}  >`,
+              `<${inlineStyles[i].type} style="${inlineStyles[i].style}">`
+            );
+          } else {
+            newHtmlStr = newHtmlStr.replace(
+              `<${inlineStyles[i].type}`,
+              `<${inlineStyles[i].type} style="${inlineStyles[i].style}"`
+            );
           }
         }
-        newHtmlStr = newHtmlStr.replace(/h1/g, "p ").replace(/\"/g,'"').replace(/ahref/g,'a href')
+        newHtmlStr = newHtmlStr
+          .replace(/h1/g, "p ")
+          .replace(/\"/g, '"')
+          .replace(/ahref/g, "a href");
 
         return `<p>${newHtmlStr}</p>`;
-
       } catch (error) {
         console.log("editInnerHtml func error: " + error);
       }
-
-    
     };
 
     // handeling the element list
@@ -121,14 +140,17 @@ const runAuto = async (url) => {
           if (eleType === "title" || eleType === "body") {
             eleData = { text: await editInnerHtml(innerHtml, list[index]) };
           } else if (eleType === "button") {
-            eleData = { href: await list[index].getAttribute("href") };
+            //----------------------------------------------work on the btn lable-------------------------------------------
+            eleData = { href: await list[index].getAttribute("href"), btnLable: await list[index].getText() };
             eleStyle = {
               backgroundOpacity: eleRgba.slice(
                 eleRgba.length - 5,
                 eleRgba.length - 1
               ),
               backgroundColor: eleRgba,
-              backgroundImage: await list[index].getCssValue("background-image"),
+              backgroundImage: await list[index].getCssValue(
+                "background-image"
+              ),
               borderColor: await list[index].getCssValue("background-color"),
               borderWidth: await list[index].getCssValue("border-width"),
               borderRadius: await list[index].getCssValue("border-radius"),
@@ -141,9 +163,8 @@ const runAuto = async (url) => {
 
           pushElementdata(elementRect, eleType, eleData, elementZ, eleStyle);
         }
-
       } catch (error) {
-        console.log('elementsPush error: ' + error);
+        console.log("elementsPush error: " + error);
       }
     }
 
@@ -156,7 +177,6 @@ const runAuto = async (url) => {
   } catch (error) {
     console.log("run auto func error: " + error);
   }
-
 };
 
 app.use(express.json());
@@ -165,24 +185,20 @@ app.post("/", async (req, res) => {
   try {
     const response = await runAuto(req.body.url);
     res.send(response);
-
   } catch (error) {
     console.log("post request error: " + error);
   }
 });
 
-app.post("/wix", async (req,res)=>{
+app.post("/wix", async (req, res) => {
   try {
     const response = await builderRun(req.body.url);
     res.send(response);
-    
   } catch (error) {
     console.log("post request error: " + error);
   }
-})
+});
 
 app.listen("8080", () => {
   console.log("server running on port 8080");
 });
-
-
