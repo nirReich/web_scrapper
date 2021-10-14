@@ -1,4 +1,5 @@
 const webdriver = require("selenium-webdriver");
+const axios = require("axios").default;
 
 let documentServices = {
   components: {
@@ -7,7 +8,8 @@ let documentServices = {
   },
 };
 
-const elementList = [
+const unSortedList = [
+
   {
       "type": "title",
       "x": 44,
@@ -809,26 +811,6 @@ const elementList = [
       "src": "http://neurosymptomsnew.kk5.org/communities/9/004/013/612/269//images/4634740808_84x108.jpg"
   },
   {
-      "type": "img",
-      "x": 0,
-      "y": 3233,
-      "width": 1,
-      "height": 1,
-      "z_index": "auto",
-      "style": "",
-      "src": "https://um.simpli.fi/lj_match?r=11678"
-  },
-  {
-      "type": "img",
-      "x": 1,
-      "y": 3233,
-      "width": 1,
-      "height": 1,
-      "z_index": "auto",
-      "style": "",
-      "src": "https://i.liadm.com/s/57333?bidder_id=204553&bidder_uuid=c3c173d02d06a9550653de6a"
-  },
-  {
       "type": "button",
       "x": 577,
       "y": 509,
@@ -1389,6 +1371,32 @@ const elementList = [
       "btnLable": "Visual Symptoms"
   }
 ]
+const elementList = unSortedList.sort((a,b)=>a.z_index-b.z_index)
+
+const handelPics = async (imgName,imgUrl) => {
+ try {
+  
+  const url =`https://bo.wix.com/site-migration-site-builder/uploadImages?userId=${wixUIDX}&metasiteId=${metaId}`;
+  const {data} = await axios.post(
+    url,
+    [{
+      
+        "imageName": `${imgName}`,
+        "imageUrl": `${imgUrl}`
+    }],
+    {
+    headers: {
+      'Authorization': auth,
+      "Content-Type": "application/json"
+    },
+  })
+  return data
+ } catch (error) {
+   console.log(error)
+ }
+  
+};
+
 
 const buildComps = async (json) => {
   try {
@@ -1422,75 +1430,79 @@ const buildComps = async (json) => {
         skin: "wysiwyg.viewer.skins.WRichTextNewSkin",
       };
     } else if (json.type === "img") {
-      //---------------img model----------
-      return {
-        componentType: "wysiwyg.viewer.components.WPhoto",
-        layout: {
-          width: json.width,
-          height: json.hight,
-          x: json.x,
-          y: json.y,
-          rotationInDegrees: 0,
-          scale: 1,
-          fixedPosition: false,
-          anchors: [],
-        },
-        data: {
-          width: json.width,
-          height: json.hight,
-          alt: json.type,
-          name: json.type,
-          uri: json.src,
-          type: "Image",
-          description: "",
-        },
-        props: {
-          type: "WPhotoProperties",
-        },
-        style: "wp2",
-      };
+      //---------------img model-----------
+      if (json.src.includes(".jpg") || json.src.includes(".png") || json.src.includes(".gif")) {
+        const imgData = await handelPics(json.type,json.src)
+        return {
+          componentType: "wysiwyg.viewer.components.WPhoto",
+          layout: {
+            width: json.width,
+            height: json.hight,
+            x: json.x,
+            y: json.y,
+            rotationInDegrees: 0,
+            scale: 1,
+            fixedPosition: false,
+            anchors: [],
+          },
+          data: {
+            width: json.width,
+            height: json.hight,
+            alt: json.type,
+            name: json.type,
+            uri: imgData[0].fileName,
+            type: "Image",
+            description: "",
+          },
+          props: {
+            type: "WPhotoProperties",
+          },
+          style: "wp2",
+        };
+      }
+      
     } else if (json.type === "button") {
       //---------------button model----------
 
       return {
-        type: 'Component',
-        skin: 'wixui.skins.Skinless',
+        type: "Component",
+        skin: "wixui.skins.Skinless",
         layout: {
-          width:json.width,
-          height:json.height,
+          width: json.width,
+          height: json.height,
           x: json.x,
-          y: json.y
+          y: json.y,
         },
         componentType: "wixui.StylableButton",
         metaData: {
-          pageId: '',
+          pageId: "",
         },
-        parent: 'comp-k3oaa1vk',
+        parent: "comp-k3oaa1vk",
         props: {
-          type: 'StylableButtonProperties',
+          type: "StylableButtonProperties",
         },
         data: {
-          type: 'StylableButton',
+          type: "StylableButton",
           metaData: {
             isPreset: false,
             schemaVersion: "1.0",
             isHidden: false,
           },
-          link: json.href || '',
-          label:json.btnLable,
-          svgId: 'b861b040274141de9c08999ec3b76edf.svg',
+          link: json.href || "",
+          label: json.btnLable,
+          svgId: "b861b040274141de9c08999ec3b76edf.svg",
         },
         style: {
-          type: 'ComponentStyle',
+          type: "ComponentStyle",
           metaData: {
             isPreset: false,
-            schemaVersion: '1.0',
+            schemaVersion: "1.0",
             isHidden: false,
-            pageId: '',
+            pageId: "",
           },
           style: {
             properties: {
-              '$st-css': `:import{
+              "$st-css": `:import{
           -st-from: 'wix-ui-santa/index.st.css';
           -st-named: StylableButton;
         }
@@ -1522,17 +1534,17 @@ const buildComps = async (json) => {
         }`,
             },
             propertiesSource: {
-              '$st-css': 'value',
+              "$st-css": "value",
             },
           },
-          componentClassName: 'wixui.StylableButton',
-          pageId: '',
-          compId: '',
-          styleType: 'custom',
-          skin: 'wixui.skins.Skinless',
+          componentClassName: "wixui.StylableButton",
+          pageId: "",
+          compId: "",
+          styleType: "custom",
+          skin: "wixui.skins.Skinless",
         },
         activeModes: {},
-        id: '',
+        id: "",
       };
     }
   } catch (error) {
@@ -1540,6 +1552,9 @@ const buildComps = async (json) => {
   }
 };
 
+
+
+//--------------------------------------------------------------------
 const builderRun = async (url) => {
   let driver = await new webdriver.Builder().forBrowser("chrome").build();
   let By = webdriver.By;
@@ -1789,7 +1804,7 @@ const builderRun = async (url) => {
       console.log("getTheFrame func error: " + error);
     }
   };
-  //--------------------------------------------------------------------
+
   try {
     await driver.get(url);
     await driver.manage().window().maximize();
@@ -1820,7 +1835,7 @@ const builderRun = async (url) => {
       await driver.executeScript(...scriptCallback);
     }
 
-    return "app runing!";
+    return "app finished!";
   } catch (error) {
     console.log("error at builderRun main func: " + error);
   }
